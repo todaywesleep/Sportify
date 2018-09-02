@@ -38,6 +38,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, RegisterPage
 
     override fun onNextButtonPressed(pageType: Int) {
         if (mViewPager.currentItem < 2)
-            mViewPager.setCurrentItem(mViewPager.currentItem, true)
+            mViewPager.setCurrentItem(mViewPager.currentItem + 1, true)
     }
 }
