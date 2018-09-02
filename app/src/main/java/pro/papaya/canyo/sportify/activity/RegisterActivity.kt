@@ -7,9 +7,10 @@ import android.view.View
 import android.widget.ImageButton
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.adapter.RegisterPageAdapter
+import pro.papaya.canyo.sportify.fragment.RegisterPageFragment
 
-class RegisterActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var mDemoCollectionPagerAdapter: RegisterPageAdapter
+class RegisterActivity : AppCompatActivity(), View.OnClickListener, RegisterPageFragment.Companion.Callback {
+    private lateinit var mRegisterPageAdapter: RegisterPageAdapter
     private lateinit var mViewPager: ViewPager
 
     private lateinit var backButton: ImageButton
@@ -27,10 +28,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         mViewPager = findViewById(R.id.registration_steps)
         backButton = findViewById(R.id.register_back_arrow)
 
-        mDemoCollectionPagerAdapter = RegisterPageAdapter(supportFragmentManager)
-        mViewPager.adapter = mDemoCollectionPagerAdapter
+        mRegisterPageAdapter = RegisterPageAdapter(supportFragmentManager, this)
+        mViewPager.adapter = mRegisterPageAdapter
 
         supportActionBar?.hide()
+        backButton.setOnClickListener(this)
         backButton.bringToFront()
+    }
+
+    override fun onNextButtonPressed(pageType: Int) {
+        if (mViewPager.currentItem < 2)
+            mViewPager.setCurrentItem(mViewPager.currentItem, true)
     }
 }

@@ -9,7 +9,9 @@ import pro.papaya.canyo.sportify.fragment.RegisterPageFragment.Companion.ARG_PAG
 
 // Since this is an object collection, use a FragmentStatePagerAdapter,
 // and NOT a FragmentPagerAdapter.
-class RegisterPageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class RegisterPageAdapter(
+        fm: FragmentManager,
+        private val callback: RegisterPageFragment.Companion.Callback) : FragmentStatePagerAdapter(fm) {
     override fun getCount(): Int = 3
 
     override fun getItem(i: Int): Fragment {
@@ -17,6 +19,7 @@ class RegisterPageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         fragment.arguments = Bundle().apply {
             putInt(ARG_PAGE_TYPE, i)
         }
+        fragment.setCallback(callback)
 
         return fragment
     }

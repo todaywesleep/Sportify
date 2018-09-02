@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import pro.papaya.canyo.myapplication.R
 
 // Instances of this class are fragments representing a single
@@ -16,7 +17,13 @@ class RegisterPageFragment : Fragment() {
         const val CREDENTIALS_PAGE: Int = 2
 
         const val ARG_PAGE_TYPE = "arg_page_type"
+
+        interface Callback {
+            fun onNextButtonPressed(pageType: Int)
+        }
     }
+
+    private var mCallback: Callback? = null
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -29,6 +36,9 @@ class RegisterPageFragment : Fragment() {
 
         val rootView: View = inflater.inflate(
                 getLayoutId(currentPage), container, false)
+        rootView.findViewById<Button>(R.id.register_next_step)?.setOnClickListener {
+            if (mCallback != null) mCallback!!.onNextButtonPressed(currentPage)
+        }
 
         return rootView
     }
@@ -40,5 +50,9 @@ class RegisterPageFragment : Fragment() {
             CREDENTIALS_PAGE -> R.layout.activity_register_credentials_page
             else -> R.layout.activity_register_bio_page
         }
+    }
+
+    fun setCallback(callback: Callback) {
+        this.mCallback = callback
     }
 }
