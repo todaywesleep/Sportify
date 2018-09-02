@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Sportify</string>
     <string name="main_string">New Sample String</string>
+
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">Login</string>
+    <string name="login_register">Register</string>
 </resources>
