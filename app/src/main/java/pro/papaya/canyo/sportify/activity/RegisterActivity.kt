@@ -9,39 +9,50 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import pro.papaya.canyo.myapplication.R
+import pro.papaya.canyo.sportify.activity.RegisterPage.Companion.ARG_PAGE_TYPE
 
-class RegisterActivity : AppCompatActivity() {
-
+class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     // When requested, this adapter returns a DemoObjectFragment,
     // representing an object in the collection.
     private lateinit var mDemoCollectionPagerAdapter: DemoCollectionPagerAdapter
     private lateinit var mViewPager: ViewPager
 
+    private lateinit var backButton: ImageButton
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.register_back_arrow -> finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        // ViewPager and its adapters use support library
-        // fragments, so use supportFragmentManager.
-        mDemoCollectionPagerAdapter = DemoCollectionPagerAdapter(supportFragmentManager)
         mViewPager = findViewById(R.id.registration_steps)
+        backButton = findViewById(R.id.register_back_arrow)
+
+        mDemoCollectionPagerAdapter = DemoCollectionPagerAdapter(supportFragmentManager)
         mViewPager.adapter = mDemoCollectionPagerAdapter
+
+        supportActionBar?.hide()
+        backButton.bringToFront()
     }
 }
 
 // Since this is an object collection, use a FragmentStatePagerAdapter,
 // and NOT a FragmentPagerAdapter.
 class DemoCollectionPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-
     override fun getCount(): Int = 3
 
     override fun getItem(i: Int): Fragment {
-        val fragment = DemoObjectFragment()
+        val fragment = RegisterPage()
         fragment.arguments = Bundle().apply {
-            // Our object is just an integer :-P
-            putInt(ARG_OBJECT, i + 1)
+            putInt(ARG_PAGE_TYPE, i)
         }
+
         return fragment
     }
 
@@ -50,19 +61,38 @@ class DemoCollectionPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapte
     }
 }
 
-private const val ARG_OBJECT = "object"
-
 // Instances of this class are fragments representing a single
 // object in our collection.
-class DemoObjectFragment : Fragment() {
+class RegisterPage : Fragment() {
+    companion object {
+        const val BIO_PAGE: Int = 0
+        const val PLACE_PAGE: Int = 1
+        const val CREDENTIALS_PAGE: Int = 2
+
+        const val ARG_PAGE_TYPE = "arg_page_type"
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        // The last two arguments ensure LayoutParams are inflated properly.
+        var currentPage = -1
+
+        arguments?.takeIf { it.containsKey(ARG_PAGE_TYPE) }?.apply {
+            currentPage = getInt(ARG_PAGE_TYPE)
+        }
+
         val rootView: View = inflater.inflate(
-                R.layout.activity_login, container, false)
+                getLayoutId(currentPage), container, false)
 
         return rootView
+    }
+
+    private fun getLayoutId(position: Int): Int {
+        return when (position) {
+            BIO_PAGE -> R.layout.activity_register_bio_page
+            PLACE_PAGE -> R.layout.activity_register_bio_page
+            CREDENTIALS_PAGE -> R.layout.activity_register_bio_page
+            else -> R.layout.activity_register_bio_page
+        }
     }
 }

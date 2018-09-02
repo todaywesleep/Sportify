@@ -2,17 +2,23 @@
     <string name="app_name">Sportify</string>
     <string name="main_string">New Sample String</string>
 
+    //LOGIN
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
     <string name="login_login">Login</string>
     <string name="login_register">Register</string>
 
+    //REGISTER
     <string name="register_register">Register</string>
-    <string name="register_id">ID</string>
+
+    <string name="register_bio">Fill BIO information</string>
+    <string name="register_first_name">First name</string>
+    <string name="register_sec_name">Second name</string>
+    <string name="register_birthday">Birthday</string>
+
     <string name="register_login">Login</string>
     <string name="register_password">Password</string>
     <string name="register_repeat_password">Repeat password</string>
-    <string name="register_first_name">First name</string>
-    <string name="register_sec_name">Second name</string>
-    <string name="register_birthday">Second name</string>
+
+    <string name="register_next_step">Next step</string>
 </resources>
