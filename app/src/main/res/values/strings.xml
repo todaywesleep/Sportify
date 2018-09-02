@@ -16,9 +16,15 @@
     <string name="register_sec_name">Second name</string>
     <string name="register_birthday">Birthday</string>
 
+    <string name="register_place">Fill place information</string>
+    <string name="register_country">Country name</string>
+    <string name="register_city">City name</string>
+
+    <string name="register_credentials">Fill credentials information</string>
     <string name="register_login">Login</string>
     <string name="register_password">Password</string>
     <string name="register_repeat_password">Repeat password</string>
 
     <string name="register_next_step">Next step</string>
+    <string name="register_finish">Finish registration</string>
 </resources>
