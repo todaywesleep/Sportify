@@ -1,4 +1,4 @@
-package pro.papaya.canyo.myapplication.network
+package pro.papaya.canyo.sportify.network
 
 import android.content.Context
 import android.widget.Toast
@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import pro.papaya.canyo.myapplication.model.Joke
+import pro.papaya.canyo.sportify.model.Joke
 
 class ApiClient {
     companion object {

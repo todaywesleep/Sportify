@@ -1,6 +1,6 @@
-package pro.papaya.canyo.myapplication.network
+package pro.papaya.canyo.sportify.network
 
-import pro.papaya.canyo.myapplication.model.Joke
+import pro.papaya.canyo.sportify.model.Joke
 import retrofit2.Call
 import retrofit2.http.GET
 

@@ -1,8 +1,9 @@
-package pro.papaya.canyo.myapplication
+package pro.papaya.canyo.sportify
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import pro.papaya.canyo.myapplication.network.ApiClient
+import pro.papaya.canyo.myapplication.R
+import pro.papaya.canyo.sportify.network.ApiClient
 
 class HelloActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
