@@ -1,5 +1,6 @@
 package pro.papaya.canyo.sportify.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -18,7 +19,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.login_register -> {
-                ApiClient.getJoke(this)
+                val intent = Intent(this, RegisterActivity::class.java)
+                startActivity(intent)
                 return
             }
         }
