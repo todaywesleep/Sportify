@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/register_first_name"
                 android:imeOptions="actionNext"
+                android:inputType="textPersonName|text|textCapWords"
                 android:nextFocusForward="@id/register_bio_second_name"
                 android:padding="@dimen/padding_small" />
 
@@ -47,6 +48,7 @@
                 android:layout_marginTop="@dimen/padding_small"
                 android:hint="@string/register_sec_name"
                 android:imeOptions="actionNext"
+                android:inputType="textPersonName|text|textCapWords"
                 android:nextFocusForward="@id/register_bio_birthday"
                 android:padding="@dimen/padding_small" />
 
@@ -64,6 +66,7 @@
         <Button
             android:id="@+id/register_next_step"
             style="@style/BaseButton"
+            android:background="@drawable/button_inactive"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/padding_default"
             android:layout_marginEnd="@dimen/padding_default"

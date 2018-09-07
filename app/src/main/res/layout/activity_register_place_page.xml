@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/register_country"
                 android:imeOptions="actionNext"
+                android:inputType="textCapWords|text"
                 android:nextFocusForward="@id/register_city"
                 android:padding="@dimen/padding_small" />
 
@@ -47,12 +48,14 @@
                 android:layout_marginTop="@dimen/padding_small"
                 android:hint="@string/register_city"
                 android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
                 android:padding="@dimen/padding_small" />
         </LinearLayout>
 
         <Button
             android:id="@+id/register_next_step"
             style="@style/BaseButton"
+            android:background="@drawable/button_inactive"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/padding_default"
             android:layout_marginEnd="@dimen/padding_default"
