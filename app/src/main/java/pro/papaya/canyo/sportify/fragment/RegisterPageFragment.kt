@@ -1,8 +1,15 @@
 package pro.papaya.canyo.sportify.fragment
 
+import android.Manifest
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -10,8 +17,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.model.RegisterBody
+import pro.papaya.canyo.sportify.utils.NavigationUtils
 import pro.papaya.canyo.sportify.utils.Utils.Companion.getRequestDateFormat
 import java.util.*
 
@@ -96,7 +105,7 @@ class RegisterPageFragment : Fragment() {
     private fun createViewHolders(position: Int, rootView: View) {
         when (position) {
             BIO_PAGE -> bioPageViewHolder = BioPageViewHolder(rootView)
-            PLACE_PAGE -> placePageViewHolder = PlacePageViewHolder(rootView)
+            PLACE_PAGE -> placePageViewHolder = PlacePageViewHolder(rootView, context!!)
             CREDENTIALS_PAGE -> credentialsPageViewHolder = CredentialsPageViewHolder(rootView)
             else -> credentialsPageViewHolder = CredentialsPageViewHolder(rootView)
         }
@@ -170,13 +179,35 @@ class RegisterPageFragment : Fragment() {
         }
     }
 
-    class PlacePageViewHolder(rootView: View) : BaseRegisterPageView(rootView) {
+    class PlacePageViewHolder(rootView: View, private val context: Context) : BaseRegisterPageView(rootView) {
+        private var latitude: Double? = null
+        private var longitude: Double? = null
         private val countryName: EditText = rootView.findViewById(R.id.register_country)
         private val cityName: EditText = rootView.findViewById(R.id.register_city)
+        private val getLocationButton: Button = rootView.findViewById(R.id.register_place_get_location)
+
         init {
             nextButton.isClickable = false
             countryName.addTextChangedListener(generateTextListener(countryName))
             cityName.addTextChangedListener(generateTextListener(cityName))
+            getLocationButton.setOnClickListener { view ->
+                if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    if (context is Activity) {
+                        ActivityCompat.requestPermissions(context,
+                                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                                1)
+                    }
+                } else {
+                    val currentLocation = NavigationUtils.getCurrentLocation(context)
+                    if (currentLocation != null) {
+                        latitude = currentLocation.latitude
+                        longitude = currentLocation.longitude
+                    }
+                }
+
+                setNextButtonState()
+            }
         }
 
         fun getCountryName(): String {
@@ -202,7 +233,9 @@ class RegisterPageFragment : Fragment() {
 
         override fun setNextButtonState() {
             if (countryName.text.isEmpty()
-                    || cityName.text.isEmpty()) {
+                    || cityName.text.isEmpty()
+                    || latitude == null
+                    || longitude == null) {
                 nextButton.setBackgroundResource(R.drawable.button_inactive)
                 nextButton.isClickable = false
             } else {

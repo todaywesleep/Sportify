@@ -5,19 +5,15 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageButton
-import android.widget.Toast
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.adapter.RegisterPageAdapter
 import pro.papaya.canyo.sportify.fragment.RegisterPageFragment
-import pro.papaya.canyo.sportify.model.BaseResponse
-import pro.papaya.canyo.sportify.model.Location
 import pro.papaya.canyo.sportify.model.RegisterBody
-import pro.papaya.canyo.sportify.network.ApiClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class RegisterActivity : AppCompatActivity(), View.OnClickListener, RegisterPageFragment.Companion.Callback {
+class RegisterActivity :
+        AppCompatActivity(),
+        View.OnClickListener,
+        RegisterPageFragment.Companion.Callback {
     private lateinit var mRegisterPageAdapter: RegisterPageAdapter
     private lateinit var mViewPager: ViewPager
 
