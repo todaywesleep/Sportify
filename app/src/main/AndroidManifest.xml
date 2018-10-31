@@ -27,6 +27,8 @@
         <activity
             android:name="pro.papaya.canyo.sportify.activity.RegisterActivity"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name="pro.papaya.canyo.sportify.activity.MainActivity" />
     </application>
 
 </manifest>

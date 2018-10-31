@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.network.ApiClient
 
@@ -14,7 +13,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id){
             R.id.login_login -> {
-
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 return
             }
 
