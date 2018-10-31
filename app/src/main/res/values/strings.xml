@@ -2,6 +2,14 @@
     <string name="app_name">Sportify</string>
     <string name="main_string">New Sample String</string>
 
+    //GLOBAL
+    <string name="gps_permissions_denied">
+        Can\'t access to your current position. Are geolocation enabled?
+    </string>
+    <string name="gps_access_permission">
+        Please allow gps permission to get your position.
+    </string>
+
     //LOGIN
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
@@ -12,18 +20,19 @@
     <string name="register_register">Register</string>
 
     <string name="register_bio">Fill BIO information</string>
-    <string name="register_first_name">First name</string>
-    <string name="register_sec_name">Second name</string>
-    <string name="register_birthday">Birthday</string>
+    <string name="register_bio_first_name">First name</string>
+    <string name="register_bio_sec_name">Second name</string>
+    <string name="register_bio_birthday">Birthday</string>
 
     <string name="register_place">Fill place information</string>
-    <string name="register_country">Country name</string>
-    <string name="register_city">City name</string>
+    <string name="register_place_get_location">Get my location</string>
+    <string name="register_place_country">Country name</string>
+    <string name="register_place_city">City name</string>
 
     <string name="register_credentials">Fill credentials information</string>
-    <string name="register_login">Login</string>
-    <string name="register_password">Password</string>
-    <string name="register_repeat_password">Repeat password</string>
+    <string name="register_credentials_login">Login</string>
+    <string name="register_credentials_password">Password</string>
+    <string name="register_credentials_repeat_password">Repeat password</string>
 
     <string name="register_next_step">Next step</string>
     <string name="register_finish">Finish registration</string>

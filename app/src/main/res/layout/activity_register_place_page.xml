@@ -34,8 +34,9 @@
                 style="@style/BaseInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/register_country"
+                android:hint="@string/register_place_country"
                 android:imeOptions="actionNext"
+                android:inputType="textCapWords|text"
                 android:nextFocusForward="@id/register_city"
                 android:padding="@dimen/padding_small" />
 
@@ -45,9 +46,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding_small"
-                android:hint="@string/register_city"
+                android:hint="@string/register_place_city"
                 android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
                 android:padding="@dimen/padding_small" />
+
+            <Button
+                android:id="@+id/register_place_get_location"
+                style="@style/BaseButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_base"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/register_place_get_location" />
         </LinearLayout>
 
         <Button
@@ -57,6 +68,7 @@
             android:layout_marginBottom="@dimen/padding_default"
             android:layout_marginEnd="@dimen/padding_default"
             android:layout_marginStart="@dimen/padding_default"
+            android:background="@drawable/button_inactive"
             android:text="@string/register_next_step" />
     </RelativeLayout>
 </ScrollView>

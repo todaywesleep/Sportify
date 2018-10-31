@@ -8,8 +8,12 @@ import android.widget.ImageButton
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.adapter.RegisterPageAdapter
 import pro.papaya.canyo.sportify.fragment.RegisterPageFragment
+import pro.papaya.canyo.sportify.model.RegisterBody
 
-class RegisterActivity : AppCompatActivity(), View.OnClickListener, RegisterPageFragment.Companion.Callback {
+class RegisterActivity :
+        AppCompatActivity(),
+        View.OnClickListener,
+        RegisterPageFragment.Companion.Callback {
     private lateinit var mRegisterPageAdapter: RegisterPageAdapter
     private lateinit var mViewPager: ViewPager
 
@@ -36,8 +40,25 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener, RegisterPage
         backButton.bringToFront()
     }
 
-    override fun onNextButtonPressed(pageType: Int) {
+    override fun onNextButtonPressed(pageType: Int, registerBody: RegisterBody?) {
         if (mViewPager.currentItem < 2)
             mViewPager.setCurrentItem(mViewPager.currentItem + 1, true)
+        else {
+            val longitude = 53.893009
+            val latitude = 27.567444
+
+//            val call = ApiClient.register(registerBody!!)
+
+//            call.enqueue(object : Callback<BaseResponse> {
+//                override fun onFailure(call: Call<BaseResponse>?, t: Throwable?) {
+//                    Toast.makeText(this@RegisterActivity, "Error", Toast.LENGTH_SHORT).show()
+//                }
+//
+//                override fun onResponse(call: Call<BaseResponse>?, response: Response<BaseResponse>?) {
+//                    Toast.makeText(this@RegisterActivity, response?.body()?.status.toString(), Toast.LENGTH_SHORT).show()
+//                }
+//
+//            })
+        }
     }
 }
