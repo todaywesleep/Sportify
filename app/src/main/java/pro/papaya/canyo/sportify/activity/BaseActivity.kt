@@ -9,7 +9,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import pro.papaya.canyo.myapplication.R
 import android.support.v4.widget.DrawerLayout
-import android.util.Log
 import android.view.Gravity
 
 abstract class BaseActivity: AppCompatActivity(){
