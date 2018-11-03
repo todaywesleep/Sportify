@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.network.ApiClient
+import java.util.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
@@ -44,5 +45,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         register.setOnClickListener(this)
 
         ApiClient.initApi()
+    }
+
+    private fun setUpCalendarInstance(){
+        Calendar.getInstance().set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
     }
 }

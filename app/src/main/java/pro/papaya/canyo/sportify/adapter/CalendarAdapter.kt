@@ -2,11 +2,10 @@ package pro.papaya.canyo.sportify.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.model.Day
 import pro.papaya.canyo.sportify.view.CalendarDayItem
 
@@ -31,11 +30,11 @@ class CalendarAdapter: BaseAdapter {
         return position.toLong()
     }
 
-    @SuppressLint("ViewHolder")
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): CalendarDayItem {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val day = this.calendarDays[position]
+        val dayView: View
 
-        val dayView = CalendarDayItem(context, day.day)
+        dayView = CalendarDayItem(context, day.day).calendarItem
 
         return dayView
     }

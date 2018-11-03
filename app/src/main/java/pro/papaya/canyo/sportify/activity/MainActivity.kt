@@ -1,6 +1,7 @@
 package pro.papaya.canyo.sportify.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.GridView
 import pro.papaya.canyo.myapplication.R
@@ -10,7 +11,7 @@ import pro.papaya.canyo.sportify.utils.ArrayUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : BaseActivity(){
+class MainActivity : BaseActivity() {
     private lateinit var grid: GridView
     private lateinit var dateAdapter: CalendarAdapter
     private val calendar = Calendar.getInstance()
@@ -20,16 +21,46 @@ class MainActivity : BaseActivity(){
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+        generateDayList()
 
         dateAdapter = CalendarAdapter(this, days)
         grid = findViewById(R.id.calendar_grid)
         grid.adapter = dateAdapter
-        generateDayList()
     }
 
-    private fun generateDayList(){
-        val days = ArrayUtils.generateArray(0, calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
-        val previousDays = arrayListOf<Int>()
-        val nextMonth = arrayListOf<Int>()
+    private fun generateDayList() {
+        //Календарь для выставления инит даты
+        val boofCalendar = Calendar.getInstance()
+        //Чистим день что бы правильно соотнести первый день месяца с днем недели
+        calendar.set(Calendar.DAY_OF_MONTH, 0)
+
+        //Структуры текущего месяца и кусочков прошедшего и грядущего
+        val currentMonthDays = ArrayUtils.generateDaysArray(1, calendar.getActualMaximum(Calendar.DAY_OF_MONTH), true)
+        val previousDays = arrayListOf<Day>()
+        val finalDaysArray = arrayListOf<Day>()
+
+        //Запись дней предыдущего месяца, который попадут на этот экран
+        if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            boofCalendar.add(Calendar.MONTH, -1)
+            var maxDaysInPrevMonth = boofCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+            for (i in calendar.get(Calendar.DAY_OF_WEEK) downTo Calendar.MONDAY step 1) {
+                previousDays.add(Day(maxDaysInPrevMonth, false))
+                maxDaysInPrevMonth--
+            }
+
+            finalDaysArray.addAll(ArrayUtils.combineDayArrays(arrayListOf(previousDays, currentMonthDays)))
+        }
+        calendar.time = Date()
+
+
+        //Докидываем дни со след месяца
+        var day = 1
+        while (finalDaysArray.size % 7 != 0){
+            finalDaysArray.add(Day(day, false))
+            day++
+        }
+
+        this.days.clear()
+        this.days.addAll(finalDaysArray)
     }
 }
