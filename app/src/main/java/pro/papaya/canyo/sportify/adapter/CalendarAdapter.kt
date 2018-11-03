@@ -32,7 +32,7 @@ class CalendarAdapter : BaseAdapter {
     val day = this.calendarDays[position]
     val dayView: View
 
-    dayView = CalendarDayItem(context, day.day).calendarItem
+    dayView = CalendarDayItem(context, day).calendarItem
 
     return dayView
   }

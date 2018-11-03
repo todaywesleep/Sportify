@@ -11,43 +11,39 @@ import pro.papaya.canyo.sportify.network.ApiClient
 import java.util.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
-    override fun onClick(v: View?) {
-        when (v!!.id){
-            R.id.login_login -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                return
-            }
+  override fun onClick(v: View?) {
+    when (v!!.id) {
+      R.id.login_login -> {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        return
+      }
 
-            R.id.login_register -> {
-                val intent = Intent(this, RegisterActivity::class.java)
-                startActivity(intent)
-                return
-            }
-        }
+      R.id.login_register -> {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+        return
+      }
     }
+  }
 
-    private lateinit var username: EditText
-    private lateinit var password: EditText
-    private lateinit var login: Button
-    private lateinit var register: Button
+  private lateinit var username: EditText
+  private lateinit var password: EditText
+  private lateinit var login: Button
+  private lateinit var register: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        supportActionBar?.hide()
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_login)
+    supportActionBar?.hide()
 
-        username = findViewById(R.id.login_username)
-        password = findViewById(R.id.login_password)
-        login = findViewById(R.id.login_login)
-        login.setOnClickListener(this)
-        register = findViewById(R.id.login_register)
-        register.setOnClickListener(this)
+    username = findViewById(R.id.login_username)
+    password = findViewById(R.id.login_password)
+    login = findViewById(R.id.login_login)
+    login.setOnClickListener(this)
+    register = findViewById(R.id.login_register)
+    register.setOnClickListener(this)
 
-        ApiClient.initApi()
-    }
-
-    private fun setUpCalendarInstance(){
-        Calendar.getInstance().set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
-    }
+    ApiClient.initApi()
+  }
 }

@@ -1,8 +1,6 @@
 package pro.papaya.canyo.sportify.activity
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.GridView
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.adapter.CalendarAdapter
