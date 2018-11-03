@@ -12,7 +12,7 @@ class ArrayUtils {
         for (i in from..to) {
           outputArray.add(Day(i,
                   isCurrentMonth,
-                  Calendar.getInstance().get(Calendar.DAY_OF_MONTH - 1) == i
+                  Calendar.getInstance().get(Calendar.DAY_OF_MONTH - 1) == i && isCurrentMonth
           ))
         }
       }
