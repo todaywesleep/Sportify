@@ -5,7 +5,7 @@ import java.util.*
 
 class ArrayUtils {
   companion object {
-    fun generateDaysArray(from: Int, to: Int, currentMonth: Int, currentYear: Int): ArrayList<Day> {
+    fun generateDaysArray(from: Int, to: Int, currentMonth: Int, currentYear: Int, forCurrentMonth: Boolean): ArrayList<Day> {
       val outputArray = arrayListOf<Day>()
 
       if (from < to) {
@@ -15,6 +15,7 @@ class ArrayUtils {
                           i,
                           (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == i
                                   && Calendar.getInstance().get(Calendar.MONTH) == currentMonth),
+                          forCurrentMonth,
                           currentMonth,
                           currentYear
                   ))

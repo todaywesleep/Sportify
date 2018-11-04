@@ -30,16 +30,25 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
     when (view.id) {
       R.id.calendar_prev_button -> {
         toggleMonth(false)
+        dayInfo.getSelectedDayInfo(null)
       }
 
       R.id.calendar_next_button -> {
         toggleMonth(true)
+        dayInfo.getSelectedDayInfo(null)
       }
     }
   }
 
   override fun onItemPress(selectedDay: Day) {
-    dayInfo.getSelectedDayInfo(selectedDay)
+    val dayObj = if (dateAdapter.getSelectedDay() == selectedDay) {
+      null
+    }else{
+      selectedDay
+    }
+
+    dayInfo.getSelectedDayInfo(dayObj)
+    grid.invalidateViews()
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,7 +100,8 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
             1,
             calendar.getActualMaximum(Calendar.DAY_OF_MONTH),
             calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.YEAR))
+            calendar.get(Calendar.YEAR),
+            true)
     val previousDays = arrayListOf<Day>()
     val finalDaysArray = arrayListOf<Day>()
 
@@ -103,6 +113,7 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
       for (i in calendar.get(Calendar.DAY_OF_WEEK) downTo Calendar.MONDAY + 1 step 1) {
         previousDays.add(
                 Day(maxDaysInPrevMonth,
+                        false,
                         false,
                         boofCalendar.get(Calendar.MONTH),
                         boofCalendar.get(Calendar.YEAR)))
@@ -119,7 +130,7 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
     //Докидываем дни со след месяца
     var day = 1
     while (finalDaysArray.size % 7 != 0) {
-      finalDaysArray.add(Day(day, false, boofCalendar.get(Calendar.MONTH), boofCalendar.get(Calendar.YEAR)))
+      finalDaysArray.add(Day(day, false, false, boofCalendar.get(Calendar.MONTH), boofCalendar.get(Calendar.YEAR)))
       day++
     }
 

@@ -9,7 +9,6 @@ import android.widget.Toast
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.model.Day
 import pro.papaya.canyo.sportify.model.MonthStruct
-import java.util.*
 
 
 class DayInfoView : RelativeLayout {

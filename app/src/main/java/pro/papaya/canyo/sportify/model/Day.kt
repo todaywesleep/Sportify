@@ -9,9 +9,9 @@ class Day {
   val month: Int
   val year: Int
 
-  constructor(day: Int, isToday: Boolean, month: Int, year: Int) {
+  constructor(day: Int, isToday: Boolean, isCurrentMonth: Boolean, month: Int, year: Int) {
     this.day = day
-    this.isCurrentMonth = Calendar.getInstance().get(Calendar.MONTH) == month
+    this.isCurrentMonth = isCurrentMonth
     this.isToday = isToday
     this.month = month
     this.year = year

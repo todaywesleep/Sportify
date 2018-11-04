@@ -47,11 +47,15 @@ class CalendarAdapter : BaseAdapter {
 
   private fun getOnItemClickListener(position: Int): View.OnClickListener {
     return View.OnClickListener {
-      if (calendarDays[position].isCurrentMonth){
+      if (calendarDays[position].isCurrentMonth) {
         mCallback.onItemPress(calendarDays[position])
 
         selectedItem = if (selectedItem == position) null else position
       }
     }
+  }
+
+  fun getSelectedDay(): Day? {
+    return if (selectedItem == null) null else calendarDays[selectedItem!!]
   }
 }
