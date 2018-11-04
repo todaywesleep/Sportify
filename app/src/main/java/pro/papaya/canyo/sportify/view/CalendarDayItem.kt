@@ -8,7 +8,7 @@ import android.widget.TextView
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.model.Day
 
-class CalendarDayItem(context: Context, day: Day) : View(context) {
+class CalendarDayItem(context: Context, day: Day, private val isItemSelected: Boolean) : View(context) {
   lateinit var calendarItem: View
   private lateinit var textView: TextView
 
@@ -23,12 +23,11 @@ class CalendarDayItem(context: Context, day: Day) : View(context) {
   }
 
   fun setUpDayItem(day: Day){
-    if (day.isToday){
-      textView.setBackgroundResource(R.drawable.calendar_item_today)
-    }else if (day.isCurrentMonth){
-      textView.setBackgroundResource(R.drawable.calendar_item_default)
-    }else{
-      textView.setTextColor(ContextCompat.getColor(context, R.color.colorGrayLight))
+    when {
+      isItemSelected -> textView.setBackgroundResource(R.drawable.calendar_item_selected)
+      day.isToday -> textView.setBackgroundResource(R.drawable.calendar_item_today)
+      day.isCurrentMonth -> textView.setBackgroundResource(R.drawable.calendar_item_default)
+      else -> textView.setTextColor(ContextCompat.getColor(context, R.color.colorGrayLight))
     }
   }
 }

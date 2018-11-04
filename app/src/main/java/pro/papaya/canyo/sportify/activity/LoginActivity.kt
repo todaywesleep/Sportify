@@ -11,6 +11,11 @@ import pro.papaya.canyo.sportify.network.ApiClient
 import java.util.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
+  private lateinit var username: EditText
+  private lateinit var password: EditText
+  private lateinit var login: Button
+  private lateinit var register: Button
+
   override fun onClick(v: View?) {
     when (v!!.id) {
       R.id.login_login -> {
@@ -27,11 +32,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
       }
     }
   }
-
-  private lateinit var username: EditText
-  private lateinit var password: EditText
-  private lateinit var login: Button
-  private lateinit var register: Button
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

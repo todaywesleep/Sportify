@@ -15,4 +15,5 @@
     <color name="inputNative">#000000</color>
 
     <color name="calendarItemToday">#ffd900</color>
+    <color name="calendarItemSelected">#9fffa3</color>
 </resources>

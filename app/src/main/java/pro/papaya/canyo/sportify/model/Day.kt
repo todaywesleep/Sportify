@@ -1,13 +1,19 @@
 package pro.papaya.canyo.sportify.model
 
-class Day {
-    val day: Int
-    val isCurrentMonth: Boolean
-    val isToday: Boolean
+import java.util.*
 
-    constructor(day: Int, isCurrentMonth: Boolean, isToday: Boolean){
-        this.day = day
-        this.isCurrentMonth = isCurrentMonth
-        this.isToday = isToday
-    }
+class Day {
+  val day: Int
+  val isCurrentMonth: Boolean
+  val isToday: Boolean
+  val month: Int
+  val year: Int
+
+  constructor(day: Int, isToday: Boolean, month: Int, year: Int) {
+    this.day = day
+    this.isCurrentMonth = Calendar.getInstance().get(Calendar.MONTH) == month
+    this.isToday = isToday
+    this.month = month
+    this.year = year
+  }
 }

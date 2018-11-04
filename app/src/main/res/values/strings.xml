@@ -45,6 +45,8 @@
     <string name="calendar_friday">Fri</string>
     <string name="calendar_saturday">Sat</string>
     <string name="calendar_sunday">Sun</string>
+    <string name="calendar_day_more_information">More information</string>
+    <string name="calendar_select_day">Select day on calendar view to get information</string>
 
     //DRAWER
     <string name="drawer_edit_profile">Edit profile</string>

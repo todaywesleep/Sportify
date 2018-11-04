@@ -2,25 +2,25 @@ package pro.papaya.canyo.sportify.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.adapter.CalendarAdapter
+import pro.papaya.canyo.sportify.fragment.DayInfoView
 import pro.papaya.canyo.sportify.model.Day
 import pro.papaya.canyo.sportify.model.MonthStruct
 import pro.papaya.canyo.sportify.utils.ArrayUtils
 import java.util.*
-import kotlin.collections.ArrayList
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), CalendarAdapter.Callback {
   private lateinit var grid: GridView
   private lateinit var monthNameView: TextView
 
   private lateinit var nextButton: ImageView
   private lateinit var previousButton: ImageView
+  private lateinit var dayInfo: DayInfoView
 
   private lateinit var dateAdapter: CalendarAdapter
   private val calendar = Calendar.getInstance()
@@ -38,6 +38,10 @@ class MainActivity : BaseActivity() {
     }
   }
 
+  override fun onItemPress(selectedDay: Day) {
+    dayInfo.getSelectedDayInfo(selectedDay)
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     calendar.firstDayOfWeek = Calendar.MONDAY
@@ -45,11 +49,12 @@ class MainActivity : BaseActivity() {
     setContentView(R.layout.activity_main)
     generateDayList()
 
-    dateAdapter = CalendarAdapter(this, days)
+    dateAdapter = CalendarAdapter(this, days, this)
     grid = findViewById(R.id.calendar_grid)
     monthNameView = findViewById(R.id.calendar_date_display)
     previousButton = findViewById(R.id.calendar_prev_button)
     nextButton = findViewById(R.id.calendar_next_button)
+    dayInfo = findViewById(R.id.day_info)
     grid.adapter = dateAdapter
 
     setHeadersState()
@@ -77,14 +82,16 @@ class MainActivity : BaseActivity() {
   }
 
   private fun generateDayList() {
-    //Календарь для выставления инит даты
+    //Календарь для выставления инит даты и работы с пред. месяцем
     val boofCalendar = Calendar.getInstance()
+    boofCalendar.add(Calendar.MONTH, -1)
 
     //Структуры текущего месяца и кусочков прошедшего и грядущего
     val currentMonthDays = ArrayUtils.generateDaysArray(
             1,
             calendar.getActualMaximum(Calendar.DAY_OF_MONTH),
-            calendar.get(Calendar.MONTH))
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.YEAR))
     val previousDays = arrayListOf<Day>()
     val finalDaysArray = arrayListOf<Day>()
 
@@ -92,22 +99,27 @@ class MainActivity : BaseActivity() {
     calendar.set(Calendar.DAY_OF_MONTH, 1)
     //Запись дней предыдущего месяца, который попадут на этот экран
     if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-      boofCalendar.add(Calendar.MONTH, -1)
       var maxDaysInPrevMonth = boofCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
       for (i in calendar.get(Calendar.DAY_OF_WEEK) downTo Calendar.MONDAY + 1 step 1) {
-        previousDays.add(Day(maxDaysInPrevMonth, false, false))
+        previousDays.add(
+                Day(maxDaysInPrevMonth,
+                        false,
+                        boofCalendar.get(Calendar.MONTH),
+                        boofCalendar.get(Calendar.YEAR)))
         maxDaysInPrevMonth--
       }
 
       finalDaysArray.addAll(ArrayUtils.combineDayArrays(arrayListOf(previousDays, currentMonthDays)))
-    }else{
+    } else {
       finalDaysArray.addAll(currentMonthDays)
     }
 
+    //Добавить 2 месяца что былучить индекс некст месяца
+    boofCalendar.add(Calendar.MONTH, 2)
     //Докидываем дни со след месяца
     var day = 1
     while (finalDaysArray.size % 7 != 0) {
-      finalDaysArray.add(Day(day, false, false))
+      finalDaysArray.add(Day(day, false, boofCalendar.get(Calendar.MONTH), boofCalendar.get(Calendar.YEAR)))
       day++
     }
 
