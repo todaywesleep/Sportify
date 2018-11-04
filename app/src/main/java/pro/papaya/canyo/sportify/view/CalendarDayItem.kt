@@ -2,6 +2,7 @@ package pro.papaya.canyo.sportify.view
 
 import android.app.Activity
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.TextView
 import pro.papaya.canyo.myapplication.R
@@ -26,6 +27,8 @@ class CalendarDayItem(context: Context, day: Day) : View(context) {
       textView.setBackgroundResource(R.drawable.calendar_item_today)
     }else if (day.isCurrentMonth){
       textView.setBackgroundResource(R.drawable.calendar_item_default)
+    }else{
+      textView.setTextColor(ContextCompat.getColor(context, R.color.colorGrayLight))
     }
   }
 }

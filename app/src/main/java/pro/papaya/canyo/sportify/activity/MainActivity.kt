@@ -1,6 +1,8 @@
 package pro.papaya.canyo.sportify.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.GridView
 import android.widget.ImageView
@@ -38,6 +40,7 @@ class MainActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    calendar.firstDayOfWeek = Calendar.MONDAY
 
     setContentView(R.layout.activity_main)
     generateDayList()
@@ -58,14 +61,16 @@ class MainActivity : BaseActivity() {
     previousButton.setOnClickListener(onClickListener)
   }
 
+  @SuppressLint("SetTextI18n")
   private fun setHeadersState() {
-    monthNameView.text = MonthStruct.values()[calendar.get(Calendar.MONTH)].name
+    monthNameView.text =
+            calendar.get(Calendar.YEAR).toString() + "  " + MonthStruct.values()[calendar.get(Calendar.MONTH)].name
   }
 
   private fun toggleMonth(next: Boolean) {
-    val increase = if (next) +1 else -1
+    val increase = if (next) 1 else -1
 
-    calendar.add(Calendar.DAY_OF_MONTH, increase)
+    calendar.add(Calendar.MONTH, increase)
     generateDayList()
     setHeadersState()
     dateAdapter.notifyDataSetChanged()
@@ -74,26 +79,30 @@ class MainActivity : BaseActivity() {
   private fun generateDayList() {
     //Календарь для выставления инит даты
     val boofCalendar = Calendar.getInstance()
-    //Чистим день что бы правильно соотнести первый день месяца с днем недели
-    calendar.set(Calendar.DAY_OF_MONTH, 0)
 
     //Структуры текущего месяца и кусочков прошедшего и грядущего
-    val currentMonthDays = ArrayUtils.generateDaysArray(1, calendar.getActualMaximum(Calendar.DAY_OF_MONTH), true)
+    val currentMonthDays = ArrayUtils.generateDaysArray(
+            1,
+            calendar.getActualMaximum(Calendar.DAY_OF_MONTH),
+            calendar.get(Calendar.MONTH))
     val previousDays = arrayListOf<Day>()
     val finalDaysArray = arrayListOf<Day>()
 
+    //Чистим день что бы правильно соотнести первый день месяца с днем недели
+    calendar.set(Calendar.DAY_OF_MONTH, 1)
     //Запись дней предыдущего месяца, который попадут на этот экран
     if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
       boofCalendar.add(Calendar.MONTH, -1)
       var maxDaysInPrevMonth = boofCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-      for (i in calendar.get(Calendar.DAY_OF_WEEK) downTo Calendar.MONDAY step 1) {
+      for (i in calendar.get(Calendar.DAY_OF_WEEK) downTo Calendar.MONDAY + 1 step 1) {
         previousDays.add(Day(maxDaysInPrevMonth, false, false))
         maxDaysInPrevMonth--
       }
 
       finalDaysArray.addAll(ArrayUtils.combineDayArrays(arrayListOf(previousDays, currentMonthDays)))
+    }else{
+      finalDaysArray.addAll(currentMonthDays)
     }
-
 
     //Докидываем дни со след месяца
     var day = 1

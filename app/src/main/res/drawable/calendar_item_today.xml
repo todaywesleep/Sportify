@@ -4,5 +4,4 @@
         android:width="2dp"
         android:color="@color/colorBlackPressed" />
     <solid android:color="@color/calendarItemToday" />
-    <corners android:radius="100dp" />
 </shape>

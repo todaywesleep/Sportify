@@ -45,4 +45,7 @@
     <string name="calendar_friday">Fri</string>
     <string name="calendar_saturday">Sat</string>
     <string name="calendar_sunday">Sun</string>
+
+    //DRAWER
+    <string name="drawer_edit_profile">Edit profile</string>
 </resources>

@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pro.papaya.canyo.sportify.activity.MainActivity">
+    tools:context="pro.papaya.canyo.sportify.activity.BaseActivity">
 
     <!--First child represents elements of activity in drawerLayout-->
 
@@ -57,12 +57,11 @@
 
     <!--Second child (navigation view) represents elements of navigation drawer in drawerLayout-->
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="match_parent"
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/main_menu">
-
-    </android.support.design.widget.NavigationView>
+        android:background="#e1e1e1"
+        android:choiceMode="singleChoice" />
 </android.support.v4.widget.DrawerLayout>
