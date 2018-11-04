@@ -30,14 +30,15 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
     when (view.id) {
       R.id.calendar_prev_button -> {
         toggleMonth(false)
-        dayInfo.getSelectedDayInfo(null)
       }
 
       R.id.calendar_next_button -> {
         toggleMonth(true)
-        dayInfo.getSelectedDayInfo(null)
       }
     }
+
+    dateAdapter.resetSelectedItem()
+    dayInfo.getSelectedDayInfo(null)
   }
 
   override fun onItemPress(selectedDay: Day) {

@@ -58,4 +58,8 @@ class CalendarAdapter : BaseAdapter {
   fun getSelectedDay(): Day? {
     return if (selectedItem == null) null else calendarDays[selectedItem!!]
   }
+
+  fun resetSelectedItem(){
+    this.selectedItem = null
+  }
 }
