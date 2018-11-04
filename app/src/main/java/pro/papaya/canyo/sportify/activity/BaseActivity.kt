@@ -1,24 +1,20 @@
 package pro.papaya.canyo.sportify.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.Gravity
 import android.view.View
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.FrameLayout
 import android.widget.ImageView
-import pro.papaya.canyo.myapplication.R
-import android.support.v4.widget.DrawerLayout
-import android.view.Gravity
 import android.widget.ListView
-import android.widget.ArrayAdapter
-import android.widget.AdapterView.OnItemClickListener
+import android.widget.TextView
+import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.adapter.DrawerItemsAdapter
-import pro.papaya.canyo.sportify.fragment.DrawerBaseFragment
-import pro.papaya.canyo.sportify.fragment.DrawerBaseFragment.Companion.ITEM_TYPE_TAG
-import pro.papaya.canyo.sportify.fragment.DrawerBaseFragment.Companion.VIEW_TYPE_ITEM
-import pro.papaya.canyo.sportify.fragment.DrawerBaseFragment.Companion.VIEW_TYPE_PROFILE
 
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -27,12 +23,16 @@ abstract class BaseActivity : AppCompatActivity() {
   private lateinit var toolbar: Toolbar
   private lateinit var drawerLayout: DrawerLayout
   private lateinit var drawerList: ListView
+  private lateinit var logoutButton: TextView
 
-  private val optionsMenu = arrayListOf("Option 1", "Option 2", "Option 3");
-
-  private val toolbarOnClickListener = View.OnClickListener { view ->
+  private val onClickListener = View.OnClickListener { view ->
     when (view.id) {
       R.id.base_drawer_menu_button -> toggleDrawer()
+      R.id.drawer_logout -> {
+        val navIntent = Intent(this, LoginActivity::class.java)
+        navIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(navIntent)
+      }
     }
   }
 
@@ -47,12 +47,13 @@ abstract class BaseActivity : AppCompatActivity() {
     container = findViewById(R.id.base_container)
     drawerLayout = findViewById(R.id.drawer_layout)
     drawerList = findViewById(R.id.left_drawer)
+    logoutButton = findViewById(R.id.drawer_logout)
     drawerList.adapter = DrawerItemsAdapter(
             this@BaseActivity,
-            arrayListOf("Item 1", "Item 2", "Item 3")
+            arrayListOf("Profile", "Diet info", "Trainer chat")
     )
-
-    drawerButton.setOnClickListener(toolbarOnClickListener)
+    drawerButton.setOnClickListener(onClickListener)
+    logoutButton.setOnClickListener(onClickListener)
 
     setOnClickListeners()
   }

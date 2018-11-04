@@ -48,4 +48,11 @@ class DrawerItemsAdapter(
   override fun getItemViewType(position: Int): Int {
     return if (position == 0) VIEW_TYPE_PROFILE else VIEW_TYPE_ITEM
   }
+
+  override fun isEnabled(position: Int): Boolean {
+    //Profile
+    if (position == 0)
+      return false
+    return true
+  }
 }

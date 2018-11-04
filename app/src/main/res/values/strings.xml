@@ -48,4 +48,5 @@
 
     //DRAWER
     <string name="drawer_edit_profile">Edit profile</string>
+    <string name="drawer_logout">Logout</string>
 </resources>
