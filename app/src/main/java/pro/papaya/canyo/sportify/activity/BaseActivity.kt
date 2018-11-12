@@ -52,6 +52,15 @@ abstract class BaseActivity : AppCompatActivity() {
     logoutButton.setOnClickListener(onClickListener)
 
     setOnClickListeners()
+    title = getToolbarTitle()
+  }
+
+  override fun setTitle(titleId: Int) {
+    findViewById<TextView>(R.id.base_toolbar_title).setText(titleId)
+  }
+
+  override fun setTitle(title: CharSequence?) {
+    findViewById<TextView>(R.id.base_toolbar_title).text = title
   }
 
   private fun getRequiredDrawerAdapter(): BaseAdapter{
@@ -67,6 +76,14 @@ abstract class BaseActivity : AppCompatActivity() {
       arrayListOf("Profile", "Diet info", "Trainer chat")
     }else{
       arrayListOf("Profile", "Clients info", "Client chat")
+    }
+  }
+
+  protected fun getToolbarTitle(): String{
+    return if (isClientAccount()){
+      getString(R.string.app_name).plus(" ").plus(getString(R.string.toolbar_client))
+    }else{
+      getString(R.string.app_name).plus(" ").plus(getString(R.string.toolbar_trainer))
     }
   }
 

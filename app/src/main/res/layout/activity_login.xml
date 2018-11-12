@@ -39,6 +39,13 @@
                 android:imeOptions="actionDone"
                 android:inputType="textPassword" />
 
+            <CheckBox
+                android:id="@+id/login_trainer_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/login_im_trainer" />
+
             <Button
                 android:id="@+id/login_login"
                 style="@style/BaseButton"

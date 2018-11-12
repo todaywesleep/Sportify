@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.activity.client.MainClientActivity
+import pro.papaya.canyo.sportify.activity.trainer.MainTrainerActivity
 import pro.papaya.canyo.sportify.network.ApiClient
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -15,11 +17,16 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
   private lateinit var password: EditText
   private lateinit var login: Button
   private lateinit var register: Button
+  private lateinit var trainerCheckBox: CheckBox
 
   override fun onClick(v: View?) {
     when (v!!.id) {
       R.id.login_login -> {
-        val intent = Intent(this, MainClientActivity::class.java)
+        val intent = if (trainerCheckBox.isChecked) {
+          Intent(this, MainTrainerActivity::class.java)
+        }else{
+          Intent(this, MainClientActivity::class.java)
+        }
         startActivity(intent)
         return
       }
@@ -42,6 +49,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     login = findViewById(R.id.login_login)
     login.setOnClickListener(this)
     register = findViewById(R.id.login_register)
+    trainerCheckBox = findViewById(R.id.login_trainer_checkbox)
     register.setOnClickListener(this)
 
     ApiClient.initApi()
