@@ -8,13 +8,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.View
+import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
 import pro.papaya.canyo.myapplication.R
-import pro.papaya.canyo.sportify.adapter.DrawerItemsAdapter
+import pro.papaya.canyo.sportify.activity.client.MainClientActivity
+import pro.papaya.canyo.sportify.adapter.ClientItemsDrawerAdapter
+import pro.papaya.canyo.sportify.adapter.TrainerItemsDrawerAdaper
 
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -38,7 +37,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
     super.setContentView(R.layout.activity_base)
     toolbar = findViewById<View>(R.id.toolbar) as Toolbar
     setSupportActionBar(toolbar)
@@ -48,14 +46,32 @@ abstract class BaseActivity : AppCompatActivity() {
     drawerLayout = findViewById(R.id.drawer_layout)
     drawerList = findViewById(R.id.left_drawer)
     logoutButton = findViewById(R.id.drawer_logout)
-    drawerList.adapter = DrawerItemsAdapter(
-            this@BaseActivity,
-            arrayListOf("Profile", "Diet info", "Trainer chat")
-    )
+    drawerList.adapter = getRequiredDrawerAdapter()
+
     drawerButton.setOnClickListener(onClickListener)
     logoutButton.setOnClickListener(onClickListener)
 
     setOnClickListeners()
+  }
+
+  private fun getRequiredDrawerAdapter(): BaseAdapter{
+    return if (isClientAccount()){
+      ClientItemsDrawerAdapter(this@BaseActivity, generateDrawerItems(true))
+    }else{
+      TrainerItemsDrawerAdaper(this@BaseActivity, generateDrawerItems(false))
+    }
+  }
+
+  private fun generateDrawerItems(isClientAccount: Boolean): ArrayList<String>{
+    return if (isClientAccount){
+      arrayListOf("Profile", "Diet info", "Trainer chat")
+    }else{
+      arrayListOf("Profile", "Clients info", "Client chat")
+    }
+  }
+
+  private fun isClientAccount(): Boolean{
+    return this::class.java.simpleName == MainClientActivity::class.java.simpleName
   }
 
   override fun setContentView(layoutId: Int) {

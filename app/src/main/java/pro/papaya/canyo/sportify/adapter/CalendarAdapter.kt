@@ -47,7 +47,7 @@ class CalendarAdapter : BaseAdapter {
             day,
             selectedItem == position,
             (day.day == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-                    && day.month == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+                    && day.month == Calendar.getInstance().get(Calendar.MONTH)
                     && day.year == Calendar.getInstance().get(Calendar.YEAR)),
             (day.month == selectedDate.get(Calendar.MONTH)
                     && day.year == selectedDate.get(Calendar.YEAR))
