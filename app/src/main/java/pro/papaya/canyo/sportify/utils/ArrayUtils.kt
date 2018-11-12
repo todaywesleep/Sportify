@@ -5,21 +5,15 @@ import java.util.*
 
 class ArrayUtils {
   companion object {
-    fun generateDaysArray(from: Int, to: Int, currentMonth: Int, currentYear: Int, forCurrentMonth: Boolean): ArrayList<Day> {
+    fun generateDaysArray(calendar: Calendar): ArrayList<Day> {
       val outputArray = arrayListOf<Day>()
 
-      if (from < to) {
-        for (i in from..to) {
-          outputArray.add(
-                  Day(
-                          i,
-                          (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == i
-                                  && Calendar.getInstance().get(Calendar.MONTH) == currentMonth),
-                          forCurrentMonth,
-                          currentMonth,
-                          currentYear
-                  ))
-        }
+      for (i in 1..calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+        outputArray.add(Day(
+                i,
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.YEAR))
+        )
       }
 
       return outputArray
@@ -32,6 +26,7 @@ class ArrayUtils {
           finalArray.add(day)
         }
       }
+      
       return finalArray
     }
   }

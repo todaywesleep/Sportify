@@ -2,6 +2,7 @@ package pro.papaya.canyo.sportify.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.GridView
 import android.widget.ImageView
@@ -44,7 +45,7 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
   override fun onItemPress(selectedDay: Day) {
     val dayObj = if (dateAdapter.getSelectedDay() == selectedDay) {
       null
-    }else{
+    } else {
       selectedDay
     }
 
@@ -88,21 +89,17 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
     calendar.add(Calendar.MONTH, increase)
     generateDayList()
     setHeadersState()
+    dateAdapter.setNewCalendar(calendar)
     dateAdapter.notifyDataSetChanged()
   }
 
   private fun generateDayList() {
     //Календарь для выставления инит даты и работы с пред. месяцем
-    val boofCalendar = Calendar.getInstance()
+    val boofCalendar = calendar.clone() as Calendar
     boofCalendar.add(Calendar.MONTH, -1)
 
     //Структуры текущего месяца и кусочков прошедшего и грядущего
-    val currentMonthDays = ArrayUtils.generateDaysArray(
-            1,
-            calendar.getActualMaximum(Calendar.DAY_OF_MONTH),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.YEAR),
-            true)
+    val currentMonthDays = ArrayUtils.generateDaysArray(calendar)
     val previousDays = arrayListOf<Day>()
     val finalDaysArray = arrayListOf<Day>()
 
@@ -114,12 +111,11 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
       for (i in calendar.get(Calendar.DAY_OF_WEEK) downTo Calendar.MONDAY + 1 step 1) {
         previousDays.add(
                 Day(maxDaysInPrevMonth,
-                        false,
-                        false,
                         boofCalendar.get(Calendar.MONTH),
                         boofCalendar.get(Calendar.YEAR)))
         maxDaysInPrevMonth--
       }
+      previousDays.reverse()
 
       finalDaysArray.addAll(ArrayUtils.combineDayArrays(arrayListOf(previousDays, currentMonthDays)))
     } else {
@@ -127,11 +123,18 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
     }
 
     //Добавить 2 месяца что былучить индекс некст месяца
-    boofCalendar.add(Calendar.MONTH, 2)
+    boofCalendar.add(Calendar.MONTH, 1)
+    boofCalendar.add(Calendar.MONTH, 1)
     //Докидываем дни со след месяца
     var day = 1
     while (finalDaysArray.size % 7 != 0) {
-      finalDaysArray.add(Day(day, false, false, boofCalendar.get(Calendar.MONTH), boofCalendar.get(Calendar.YEAR)))
+      finalDaysArray.add(
+              Day(
+                      day,
+                      boofCalendar.get(Calendar.MONTH),
+                      boofCalendar.get(Calendar.YEAR)
+              ))
+
       day++
     }
 
