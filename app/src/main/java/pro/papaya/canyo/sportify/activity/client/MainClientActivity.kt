@@ -1,13 +1,13 @@
-package pro.papaya.canyo.sportify.activity
+package pro.papaya.canyo.sportify.activity.client
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
 import pro.papaya.canyo.myapplication.R
+import pro.papaya.canyo.sportify.activity.BaseActivity
 import pro.papaya.canyo.sportify.adapter.CalendarAdapter
 import pro.papaya.canyo.sportify.fragment.DayInfoView
 import pro.papaya.canyo.sportify.model.Day
@@ -15,7 +15,7 @@ import pro.papaya.canyo.sportify.model.MonthStruct
 import pro.papaya.canyo.sportify.utils.ArrayUtils
 import java.util.*
 
-class MainActivity : BaseActivity(), CalendarAdapter.Callback {
+class MainClientActivity : BaseActivity(), CalendarAdapter.Callback {
   private lateinit var grid: GridView
   private lateinit var monthNameView: TextView
 
@@ -57,7 +57,7 @@ class MainActivity : BaseActivity(), CalendarAdapter.Callback {
     super.onCreate(savedInstanceState)
     calendar.firstDayOfWeek = Calendar.MONDAY
 
-    setContentView(R.layout.activity_main)
+    setContentView(R.layout.activity_client_main)
     generateDayList()
 
     dateAdapter = CalendarAdapter(this, days, this)

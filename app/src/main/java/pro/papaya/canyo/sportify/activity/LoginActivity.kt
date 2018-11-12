@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import pro.papaya.canyo.myapplication.R
+import pro.papaya.canyo.sportify.activity.client.MainClientActivity
 import pro.papaya.canyo.sportify.network.ApiClient
-import java.util.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
   private lateinit var username: EditText
@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
   override fun onClick(v: View?) {
     when (v!!.id) {
       R.id.login_login -> {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainClientActivity::class.java)
         startActivity(intent)
         return
       }

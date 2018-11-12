@@ -7,8 +7,6 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import pro.papaya.canyo.sportify.fragment.RegisterPageFragment
 import pro.papaya.canyo.sportify.fragment.RegisterPageFragment.Companion.ARG_PAGE_TYPE
 
-// Since this is an object collection, use a FragmentStatePagerAdapter,
-// and NOT a FragmentPagerAdapter.
 class RegisterPageAdapter(
         fm: FragmentManager,
         private val callback: RegisterPageFragment.Companion.Callback) : FragmentStatePagerAdapter(fm) {
