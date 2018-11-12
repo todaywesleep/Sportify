@@ -50,4 +50,7 @@
     //DRAWER
     <string name="drawer_edit_profile">Edit profile</string>
     <string name="drawer_logout">Logout</string>
+
+    //MAIN TRAINER ACTIVITY
+    <string name="main_trainer_activity_subheader">Upcoming Events</string>
 </resources>

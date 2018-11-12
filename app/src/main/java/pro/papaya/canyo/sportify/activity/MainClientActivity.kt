@@ -1,4 +1,4 @@
-package pro.papaya.canyo.sportify.activity.client
+package pro.papaya.canyo.sportify.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
 import pro.papaya.canyo.myapplication.R
-import pro.papaya.canyo.sportify.activity.BaseActivity
 import pro.papaya.canyo.sportify.adapter.CalendarAdapter
 import pro.papaya.canyo.sportify.fragment.DayInfoView
 import pro.papaya.canyo.sportify.model.Day

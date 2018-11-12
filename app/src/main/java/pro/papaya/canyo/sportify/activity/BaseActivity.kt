@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import pro.papaya.canyo.myapplication.R
-import pro.papaya.canyo.sportify.activity.client.MainClientActivity
 import pro.papaya.canyo.sportify.adapter.ClientItemsDrawerAdapter
 import pro.papaya.canyo.sportify.adapter.TrainerItemsDrawerAdaper
 

@@ -8,8 +8,6 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import pro.papaya.canyo.myapplication.R
-import pro.papaya.canyo.sportify.activity.client.MainClientActivity
-import pro.papaya.canyo.sportify.activity.trainer.MainTrainerActivity
 import pro.papaya.canyo.sportify.network.ApiClient
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
