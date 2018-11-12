@@ -28,295 +28,295 @@ import java.util.*
 // Instances of this class are fragments representing a single
 // object in our collection.
 class RegisterPageFragment : Fragment() {
-    companion object {
-        const val BIO_PAGE: Int = 0
-        const val PLACE_PAGE: Int = 1
-        const val CREDENTIALS_PAGE: Int = 2
+  companion object {
+    const val BIO_PAGE: Int = 0
+    const val PLACE_PAGE: Int = 1
+    const val CREDENTIALS_PAGE: Int = 2
 
-        const val ARG_PAGE_TYPE = "arg_page_type"
+    const val ARG_PAGE_TYPE = "arg_page_type"
 
-        interface Callback {
-            fun onNextButtonPressed(pageType: Int, registerBody: RegisterBody?)
-        }
+    interface Callback {
+      fun onNextButtonPressed(pageType: Int, registerBody: RegisterBody?)
+    }
+  }
+
+  private var mCallback: Callback? = null
+
+  private lateinit var bioPageViewHolder: BioPageViewHolder
+  private lateinit var placePageViewHolder: PlacePageViewHolder
+  private lateinit var credentialsPageViewHolder: CredentialsPageViewHolder
+
+  override fun onCreateView(inflater: LayoutInflater,
+                            container: ViewGroup?,
+                            savedInstanceState: Bundle?): View {
+    var currentPage = -1
+    var registerBody = RegisterBody()
+
+    arguments?.takeIf { it.containsKey(ARG_PAGE_TYPE) }?.apply {
+      currentPage = getInt(ARG_PAGE_TYPE)
     }
 
-    private var mCallback: Callback? = null
+    val rootView: View = inflater.inflate(
+            getLayoutId(currentPage), container, false)
+    createViewHolders(currentPage, rootView)
 
-    private lateinit var bioPageViewHolder: BioPageViewHolder
-    private lateinit var placePageViewHolder: PlacePageViewHolder
-    private lateinit var credentialsPageViewHolder: CredentialsPageViewHolder
-
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        var currentPage = -1
-        var registerBody = RegisterBody()
-
-        arguments?.takeIf { it.containsKey(ARG_PAGE_TYPE) }?.apply {
-            currentPage = getInt(ARG_PAGE_TYPE)
+    rootView.findViewById<Button>(R.id.register_next_step)?.setOnClickListener {
+      if (mCallback != null) {
+        when (currentPage) {
+          BIO_PAGE -> {
+            registerBody.fillBioInformation(
+                    bioPageViewHolder.getFirstName(),
+                    bioPageViewHolder.getSecondName(),
+                    bioPageViewHolder.getBirthday()
+            )
+          }
+          PLACE_PAGE -> {
+            registerBody.fillLocationInformation(
+                    placePageViewHolder.getCountryName(),
+                    placePageViewHolder.getCityName(),
+                    23.32,
+                    32.23
+            )
+          }
+          CREDENTIALS_PAGE -> {
+            registerBody.fillCredentialsInformation(
+                    credentialsPageViewHolder.getLogin(),
+                    credentialsPageViewHolder.getPassword()
+            )
+          }
         }
 
-        val rootView: View = inflater.inflate(
-                getLayoutId(currentPage), container, false)
-        createViewHolders(currentPage, rootView)
-
-        rootView.findViewById<Button>(R.id.register_next_step)?.setOnClickListener {
-            if (mCallback != null) {
-                when (currentPage) {
-                    BIO_PAGE -> {
-                        registerBody.fillBioInformation(
-                                bioPageViewHolder.getFirstName(),
-                                bioPageViewHolder.getSecondName(),
-                                bioPageViewHolder.getBirthday()
-                        )
-                    }
-                    PLACE_PAGE -> {
-                        registerBody.fillLocationInformation(
-                                placePageViewHolder.getCountryName(),
-                                placePageViewHolder.getCityName(),
-                                23.32,
-                                32.23
-                        )
-                    }
-                    CREDENTIALS_PAGE -> {
-                        registerBody.fillCredentialsInformation(
-                                credentialsPageViewHolder.getLogin(),
-                                credentialsPageViewHolder.getPassword()
-                        )
-                    }
-                }
-
-                mCallback!!.onNextButtonPressed(currentPage, null)
-            }
-        }
-
-        return rootView
+        mCallback!!.onNextButtonPressed(currentPage, null)
+      }
     }
 
-    private fun getLayoutId(position: Int): Int {
-        return when (position) {
-            BIO_PAGE -> R.layout.activity_register_bio_page
-            PLACE_PAGE -> R.layout.activity_register_place_page
-            CREDENTIALS_PAGE -> R.layout.activity_register_credentials_page
-            else -> R.layout.activity_register_bio_page
-        }
+    return rootView
+  }
+
+  private fun getLayoutId(position: Int): Int {
+    return when (position) {
+      BIO_PAGE -> R.layout.activity_register_bio_page
+      PLACE_PAGE -> R.layout.activity_register_place_page
+      CREDENTIALS_PAGE -> R.layout.activity_register_credentials_page
+      else -> R.layout.activity_register_bio_page
+    }
+  }
+
+  private fun createViewHolders(position: Int, rootView: View) {
+    when (position) {
+      BIO_PAGE -> bioPageViewHolder = BioPageViewHolder(rootView)
+      PLACE_PAGE -> placePageViewHolder = PlacePageViewHolder(rootView, context!!)
+      CREDENTIALS_PAGE -> credentialsPageViewHolder = CredentialsPageViewHolder(rootView)
+      else -> credentialsPageViewHolder = CredentialsPageViewHolder(rootView)
+    }
+  }
+
+  fun setCallback(callback: Callback) {
+    this.mCallback = callback
+  }
+
+  class BioPageViewHolder(rootView: View) : BaseRegisterPageView(rootView) {
+    private val firstName: EditText = rootView.findViewById(R.id.register_bio_first_name)
+    private val secondName: EditText = rootView.findViewById(R.id.register_bio_second_name)
+    private val birthday: EditText = rootView.findViewById(R.id.register_bio_birthday)
+    fun getFirstName(): String {
+      return firstName.text.toString()
     }
 
-    private fun createViewHolders(position: Int, rootView: View) {
-        when (position) {
-            BIO_PAGE -> bioPageViewHolder = BioPageViewHolder(rootView)
-            PLACE_PAGE -> placePageViewHolder = PlacePageViewHolder(rootView, context!!)
-            CREDENTIALS_PAGE -> credentialsPageViewHolder = CredentialsPageViewHolder(rootView)
-            else -> credentialsPageViewHolder = CredentialsPageViewHolder(rootView)
-        }
+    fun getSecondName(): String {
+      return secondName.text.toString()
     }
 
-    fun setCallback(callback: Callback) {
-        this.mCallback = callback
+    fun getBirthday(): String {
+      return birthday.text.toString()
     }
 
-    class BioPageViewHolder(rootView: View) : BaseRegisterPageView(rootView) {
-        private val firstName: EditText = rootView.findViewById(R.id.register_bio_first_name)
-        private val secondName: EditText = rootView.findViewById(R.id.register_bio_second_name)
-        private val birthday: EditText = rootView.findViewById(R.id.register_bio_birthday)
-        fun getFirstName(): String {
-            return firstName.text.toString()
+    init {
+      nextButton.isEnabled = false
+      firstName.addTextChangedListener(generateTextListener(firstName))
+      secondName.addTextChangedListener(generateTextListener(secondName))
+      birthday.addTextChangedListener(generateTextListener(birthday))
+      birthday.run {
+        isClickable = true
+        isFocusableInTouchMode = false
+        isFocusable
+        setOnClickListener {
+          DatePickerDialog(rootView.context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val calendar = Calendar.getInstance()
+            calendar.set(year, monthOfYear, dayOfMonth)
+            birthday.setText(getRequestDateFormat(calendar.time))
+          },
+                  Calendar.getInstance().get(Calendar.YEAR),
+                  Calendar.getInstance().get(Calendar.MONTH),
+                  Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).show()
         }
-
-        fun getSecondName(): String {
-            return secondName.text.toString()
-        }
-
-        fun getBirthday(): String {
-            return birthday.text.toString()
-        }
-
-        init {
-            nextButton.isClickable = false
-            firstName.addTextChangedListener(generateTextListener(firstName))
-            secondName.addTextChangedListener(generateTextListener(secondName))
-            birthday.addTextChangedListener(generateTextListener(birthday))
-            birthday.run {
-                isClickable = true
-                isFocusableInTouchMode = false
-                isFocusable
-                setOnClickListener {
-                    DatePickerDialog(rootView.context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                        val calendar = Calendar.getInstance()
-                        calendar.set(year, monthOfYear, dayOfMonth)
-                        birthday.setText(getRequestDateFormat(calendar.time))
-                    },
-                            Calendar.getInstance().get(Calendar.YEAR),
-                            Calendar.getInstance().get(Calendar.MONTH),
-                            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).show()
-                }
-            }
-        }
-
-        private fun generateTextListener(forView: EditText): TextWatcher {
-            return object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {}
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (s.isNullOrEmpty()) forView.setBackgroundResource(R.drawable.input_incorrect)
-                    else forView.setBackgroundResource(R.drawable.input_base)
-
-                    setNextButtonState()
-                }
-            }
-        }
-
-        override fun setNextButtonState() {
-            if (firstName.text.isEmpty()
-                    || secondName.text.isEmpty()
-                    || birthday.text.isEmpty()) {
-                nextButton.setBackgroundResource(R.drawable.button_inactive)
-                nextButton.isClickable = false
-            } else {
-                nextButton.setBackgroundResource(R.drawable.button_base)
-                nextButton.isClickable = true
-            }
-        }
+      }
     }
 
-    class PlacePageViewHolder(rootView: View, private val context: Context) : BaseRegisterPageView(rootView) {
-        private var latitude: Double? = null
-        private var longitude: Double? = null
-        private val countryName: EditText = rootView.findViewById(R.id.register_country)
-        private val cityName: EditText = rootView.findViewById(R.id.register_city)
-        private val getLocationButton: Button = rootView.findViewById(R.id.register_place_get_location)
+    private fun generateTextListener(forView: EditText): TextWatcher {
+      return object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+          if (s.isNullOrEmpty()) forView.setBackgroundResource(R.drawable.input_incorrect)
+          else forView.setBackgroundResource(R.drawable.input_base)
 
-        init {
-            nextButton.isClickable = false
-            countryName.addTextChangedListener(generateTextListener(countryName))
-            cityName.addTextChangedListener(generateTextListener(cityName))
-            getLocationButton.setOnClickListener { view ->
-                if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    if (context is Activity) {
-                        ActivityCompat.requestPermissions(context,
-                                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                                1)
-                    }
-                } else {
-                    val currentLocation = NavigationUtils.getCurrentLocation(context)
-                    if (currentLocation != null) {
-                        latitude = currentLocation.latitude
-                        longitude = currentLocation.longitude
-                    }
-                }
-
-                setNextButtonState()
-            }
+          setNextButtonState()
         }
-
-        fun getCountryName(): String {
-            return countryName.text.toString()
-        }
-
-        fun getCityName(): String {
-            return cityName.text.toString()
-        }
-
-        private fun generateTextListener(forView: EditText): TextWatcher {
-            return object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {}
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (s.isNullOrEmpty()) forView.setBackgroundResource(R.drawable.input_incorrect)
-                    else forView.setBackgroundResource(R.drawable.input_base)
-
-                    setNextButtonState()
-                }
-            }
-        }
-
-        override fun setNextButtonState() {
-            if (countryName.text.isEmpty()
-                    || cityName.text.isEmpty()
-                    || latitude == null
-                    || longitude == null) {
-                nextButton.setBackgroundResource(R.drawable.button_inactive)
-                nextButton.isClickable = false
-            } else {
-                nextButton.setBackgroundResource(R.drawable.button_base)
-                nextButton.isClickable = true
-            }
-        }
+      }
     }
 
-    class CredentialsPageViewHolder(rootView: View) : BaseRegisterPageView(rootView) {
-        private val login: EditText = rootView.findViewById(R.id.register_login)
-        private val password: EditText = rootView.findViewById(R.id.register_password)
-        private val repeatPassword: EditText = rootView.findViewById(R.id.register_repeat_password)
-        fun getLogin(): String {
-            return login.text.toString()
+    override fun setNextButtonState() {
+      if (firstName.text.isEmpty()
+              || secondName.text.isEmpty()
+              || birthday.text.isEmpty()) {
+        nextButton.setBackgroundResource(R.drawable.button_inactive)
+        nextButton.isEnabled = false
+      } else {
+        nextButton.setBackgroundResource(R.drawable.button_base)
+        nextButton.isEnabled = true
+      }
+    }
+  }
+
+  class PlacePageViewHolder(rootView: View, private val context: Context) : BaseRegisterPageView(rootView) {
+    private var latitude: Double? = null
+    private var longitude: Double? = null
+    private val countryName: EditText = rootView.findViewById(R.id.register_country)
+    private val cityName: EditText = rootView.findViewById(R.id.register_city)
+    private val getLocationButton: Button = rootView.findViewById(R.id.register_place_get_location)
+
+    init {
+      nextButton.isEnabled = false
+      countryName.addTextChangedListener(generateTextListener(countryName))
+      cityName.addTextChangedListener(generateTextListener(cityName))
+      getLocationButton.setOnClickListener { view ->
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+          if (context is Activity) {
+            ActivityCompat.requestPermissions(context,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    1)
+          }
+        } else {
+          val currentLocation = NavigationUtils.getCurrentLocation(context)
+          if (currentLocation != null) {
+            latitude = currentLocation.latitude
+            longitude = currentLocation.longitude
+          }
         }
 
-        fun getPassword(): String {
-            return password.text.toString()
-        }
-
-        init {
-            nextButton.isClickable = false
-            login.addTextChangedListener(generateTextListener(login))
-            password.addTextChangedListener(generatePasswordChangeListener(true))
-            repeatPassword.addTextChangedListener(generatePasswordChangeListener(false))
-        }
-
-        private fun generatePasswordChangeListener(isPasswordField: Boolean): TextWatcher {
-            return object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {}
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val text = s ?: ""
-                    val fieldToCheck = run {
-                        if (isPasswordField) password
-                        else repeatPassword
-                    }
-
-                    if (text.isEmpty()
-                            || text != run {
-                                if (isPasswordField) repeatPassword.text
-                                else password.text
-                            }) {
-                        fieldToCheck.setBackgroundResource(R.drawable.input_incorrect)
-                    } else {
-                        fieldToCheck.setBackgroundResource(R.drawable.input_base)
-                    }
-                }
-            }
-        }
-
-        private fun generateTextListener(forView: EditText): TextWatcher {
-            return object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {}
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (s.isNullOrEmpty()) forView.setBackgroundResource(R.drawable.input_incorrect)
-                    else forView.setBackgroundResource(R.drawable.input_base)
-
-                    setNextButtonState()
-                }
-            }
-        }
-
-        override fun setNextButtonState() {
-            if (login.text.isEmpty()
-                    || password.text.isEmpty()
-                    || repeatPassword.text.isEmpty()) {
-                nextButton.setBackgroundResource(R.drawable.button_inactive)
-                nextButton.isClickable = false
-            } else {
-                nextButton.isClickable = true
-                nextButton.setBackgroundResource(R.drawable.button_base)
-            }
-        }
+        setNextButtonState()
+      }
     }
 
-    abstract class BaseRegisterPageView(rootView: View) {
-        protected val nextButton: Button = rootView.findViewById(R.id.register_next_step)
-
-        abstract fun setNextButtonState()
+    fun getCountryName(): String {
+      return countryName.text.toString()
     }
+
+    fun getCityName(): String {
+      return cityName.text.toString()
+    }
+
+    private fun generateTextListener(forView: EditText): TextWatcher {
+      return object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+          if (s.isNullOrEmpty()) forView.setBackgroundResource(R.drawable.input_incorrect)
+          else forView.setBackgroundResource(R.drawable.input_base)
+
+          setNextButtonState()
+        }
+      }
+    }
+
+    override fun setNextButtonState() {
+      if (countryName.text.isEmpty()
+              || cityName.text.isEmpty()
+              || latitude == null
+              || longitude == null) {
+        nextButton.setBackgroundResource(R.drawable.button_inactive)
+        nextButton.isEnabled = false
+      } else {
+        nextButton.setBackgroundResource(R.drawable.button_base)
+        nextButton.isEnabled = true
+      }
+    }
+  }
+
+  class CredentialsPageViewHolder(rootView: View) : BaseRegisterPageView(rootView) {
+    private val login: EditText = rootView.findViewById(R.id.register_login)
+    private val password: EditText = rootView.findViewById(R.id.register_password)
+    private val repeatPassword: EditText = rootView.findViewById(R.id.register_repeat_password)
+    fun getLogin(): String {
+      return login.text.toString()
+    }
+
+    fun getPassword(): String {
+      return password.text.toString()
+    }
+
+    init {
+      nextButton.isEnabled = false
+      login.addTextChangedListener(generateTextListener(login))
+      password.addTextChangedListener(generatePasswordChangeListener(true))
+      repeatPassword.addTextChangedListener(generatePasswordChangeListener(false))
+    }
+
+    private fun generatePasswordChangeListener(isPasswordField: Boolean): TextWatcher {
+      return object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+          val text = s ?: ""
+          val fieldToCheck = run {
+            if (isPasswordField) password
+            else repeatPassword
+          }
+
+          if (text.isEmpty()
+                  || text != run {
+                    if (isPasswordField) repeatPassword.text
+                    else password.text
+                  }) {
+            fieldToCheck.setBackgroundResource(R.drawable.input_incorrect)
+          } else {
+            fieldToCheck.setBackgroundResource(R.drawable.input_base)
+          }
+        }
+      }
+    }
+
+    private fun generateTextListener(forView: EditText): TextWatcher {
+      return object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+          if (s.isNullOrEmpty()) forView.setBackgroundResource(R.drawable.input_incorrect)
+          else forView.setBackgroundResource(R.drawable.input_base)
+
+          setNextButtonState()
+        }
+      }
+    }
+
+    override fun setNextButtonState() {
+      if (login.text.isEmpty()
+              || password.text.isEmpty()
+              || repeatPassword.text.isEmpty()) {
+        nextButton.setBackgroundResource(R.drawable.button_inactive)
+        nextButton.isEnabled = false
+      } else {
+        nextButton.isEnabled = true
+        nextButton.setBackgroundResource(R.drawable.button_base)
+      }
+    }
+  }
+
+  abstract class BaseRegisterPageView(rootView: View) {
+    protected val nextButton: Button = rootView.findViewById(R.id.register_next_step)
+    
+    abstract fun setNextButtonState()
+  }
 }

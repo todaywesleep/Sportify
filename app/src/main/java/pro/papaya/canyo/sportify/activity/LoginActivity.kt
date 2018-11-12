@@ -26,7 +26,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
       R.id.login_register -> {
         val intent = Intent(this, RegisterActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         return
       }

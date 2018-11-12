@@ -12,15 +12,15 @@ import pro.papaya.canyo.sportify.fragment.RegisterPageFragment.Companion.ARG_PAG
 class RegisterPageAdapter(
         fm: FragmentManager,
         private val callback: RegisterPageFragment.Companion.Callback) : FragmentStatePagerAdapter(fm) {
-    override fun getCount(): Int = 3
+  override fun getCount(): Int = 3
 
-    override fun getItem(i: Int): Fragment {
-        val fragment = RegisterPageFragment()
-        fragment.arguments = Bundle().apply {
-            putInt(ARG_PAGE_TYPE, i)
-        }
-        fragment.setCallback(callback)
-
-        return fragment
+  override fun getItem(i: Int): Fragment {
+    val fragment = RegisterPageFragment()
+    fragment.arguments = Bundle().apply {
+      putInt(ARG_PAGE_TYPE, i)
     }
+    fragment.setCallback(callback)
+
+    return fragment
+  }
 }
