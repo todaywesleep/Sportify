@@ -10,6 +10,9 @@ class Location: Serializable{
         this.latitude = latitude
     }
 
+    var street: String = ""
+    var house: String = ""
+    var additionalInfo: String = ""
     var country = ""
     var city = ""
     var longitude = 53.893009
