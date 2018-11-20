@@ -31,9 +31,7 @@ class RegisterBody : Serializable {
     fun fillLocationInformation(countryName: String, cityName: String, latitude: Double, longitude: Double) {
         this.location = Location(
                 countryName,
-                cityName,
-                latitude,
-                longitude
+                cityName
         )
     }
 

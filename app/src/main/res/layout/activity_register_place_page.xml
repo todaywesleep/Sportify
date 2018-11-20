@@ -51,6 +51,40 @@
                 android:inputType="textCapWords|text"
                 android:padding="@dimen/padding_small" />
 
+            <EditText
+                android:id="@+id/register_street"
+                style="@style/BaseInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:hint="@string/register_place_street"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
+                android:padding="@dimen/padding_small" />
+
+            <EditText
+                android:id="@+id/register_house"
+                style="@style/BaseInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:hint="@string/register_place_house"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
+                android:padding="@dimen/padding_small" />
+
+            <EditText
+                android:id="@+id/register_additional_info"
+                style="@style/BaseInput"
+                android:maxLines="5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:hint="@string/register_place_additional_info"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
+                android:padding="@dimen/padding_small" />
+
             <Button
                 android:id="@+id/register_place_get_location"
                 style="@style/BaseButton"
