@@ -87,7 +87,7 @@ abstract class BaseActivity : AppCompatActivity() {
   }
 
   private fun isClientAccount(): Boolean{
-    return this::class.java.simpleName == MainClientActivity::class.java.simpleName
+    return this::class.java.simpleName == NewMainActivity::class.java.simpleName
   }
 
   override fun setContentView(layoutId: Int) {
