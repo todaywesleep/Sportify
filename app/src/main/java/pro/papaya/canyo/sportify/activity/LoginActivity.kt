@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val intent = if (trainerCheckBox.isChecked) {
           Intent(this, MainTrainerActivity::class.java)
         }else{
-          Intent(this, NewMainActivity::class.java)
+          Intent(this, MainClientActivity::class.java)
         }
         startActivity(intent)
         return

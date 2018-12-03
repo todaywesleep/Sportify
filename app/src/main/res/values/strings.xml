@@ -53,6 +53,11 @@
     //DRAWER
     <string name="drawer_edit_profile">Edit profile</string>
     <string name="drawer_logout">Logout</string>
+    <string name="drawer_profile">Profile</string>
+    <string name="drawer_calories">Calories</string>
+    <string name="drawer_trainer_chat">Trainer chat</string>
+    <string name="drawer_client_chat">Client chat</string>
+    <string name="drawer_clients_info">Clients info</string>
 
     //MAIN TRAINER ACTIVITY
     <string name="main_trainer_activity_subheader">Upcoming Events</string>

@@ -35,8 +35,8 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity android:name="pro.papaya.canyo.sportify.activity.MainClientActivity" />
-        
-        <activity android:name="pro.papaya.canyo.sportify.activity.NewMainActivity" />
+
+        <activity android:name="pro.papaya.canyo.sportify.activity.CaloriesActivity" />
     </application>
 
 </manifest>

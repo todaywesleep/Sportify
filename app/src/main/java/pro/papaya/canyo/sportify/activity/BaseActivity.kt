@@ -14,7 +14,6 @@ import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.adapter.ClientItemsDrawerAdapter
 import pro.papaya.canyo.sportify.adapter.TrainerItemsDrawerAdaper
 
-
 abstract class BaseActivity : AppCompatActivity() {
   private lateinit var container: FrameLayout
   private lateinit var drawerButton: ImageView
@@ -72,9 +71,17 @@ abstract class BaseActivity : AppCompatActivity() {
 
   private fun generateDrawerItems(isClientAccount: Boolean): ArrayList<String>{
     return if (isClientAccount){
-      arrayListOf("Profile", "Diet info", "Trainer chat")
+      arrayListOf(
+              getString(R.string.drawer_profile),
+              getString(R.string.drawer_calories),
+              getString(R.string.drawer_trainer_chat)
+      )
     }else{
-      arrayListOf("Profile", "Clients info", "Client chat")
+      arrayListOf(
+              getString(R.string.drawer_profile),
+              getString(R.string.drawer_clients_info),
+              getString(R.string.drawer_client_chat)
+      )
     }
   }
 
@@ -87,7 +94,7 @@ abstract class BaseActivity : AppCompatActivity() {
   }
 
   private fun isClientAccount(): Boolean{
-    return this::class.java.simpleName == NewMainActivity::class.java.simpleName
+    return this::class.java.simpleName == MainClientActivity::class.java.simpleName
   }
 
   override fun setContentView(layoutId: Int) {
