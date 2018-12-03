@@ -61,4 +61,8 @@
 
     //MAIN TRAINER ACTIVITY
     <string name="main_trainer_activity_subheader">Upcoming Events</string>
+
+    //CALORIES ACTIVITY
+    <string name="calories_choose_product">Choose product from list</string>
+    <string name="calories_enter_grams">Enter product weight</string>
 </resources>
