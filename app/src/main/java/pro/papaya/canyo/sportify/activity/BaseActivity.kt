@@ -13,6 +13,9 @@ import android.widget.AdapterView.OnItemClickListener
 import pro.papaya.canyo.myapplication.R
 import pro.papaya.canyo.sportify.adapter.ClientItemsDrawerAdapter
 import pro.papaya.canyo.sportify.adapter.TrainerItemsDrawerAdaper
+import pro.papaya.canyo.sportify.consts.CommonConsts
+import pro.papaya.canyo.sportify.utils.SharedPrefsUtils
+import pro.papaya.canyo.sportify.utils.SharedPrefsUtils.Companion.KEY_ACCOUNT_TYPE
 
 abstract class BaseActivity : AppCompatActivity() {
   private lateinit var container: FrameLayout
@@ -26,6 +29,7 @@ abstract class BaseActivity : AppCompatActivity() {
     when (view.id) {
       R.id.base_drawer_menu_button -> toggleDrawer()
       R.id.drawer_logout -> {
+        SharedPrefsUtils.clearDB()
         val navIntent = Intent(this, LoginActivity::class.java)
         navIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(navIntent)
@@ -94,7 +98,7 @@ abstract class BaseActivity : AppCompatActivity() {
   }
 
   private fun isClientAccount(): Boolean{
-    return this::class.java.simpleName == MainClientActivity::class.java.simpleName
+    return (SharedPrefsUtils.getStringProperty(KEY_ACCOUNT_TYPE) == CommonConsts.ACCOUNT_TYPE_CLIENT)
   }
 
   override fun setContentView(layoutId: Int) {
