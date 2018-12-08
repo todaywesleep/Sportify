@@ -9,8 +9,10 @@
         android:id="@+id/calories_items"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@id/calories_measure"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="2" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/calories_measure"
@@ -18,14 +20,15 @@
         android:layout_height="0dp"
         android:padding="@dimen/padding_default"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calories_items">
+        app:layout_constraintTop_toBottomOf="@id/calories_items"
+        app:layout_constraintVertical_weight="1">
 
         <EditText
-            android:inputType="number"
             android:id="@+id/calories_weight_input"
+            style="@style/BaseInput"
             android:layout_width="match_parent"
-            android:hint="@string/calories_enter_grams"
             android:layout_height="wrap_content"
-            style="@style/BaseInput" />
+            android:hint="@string/calories_enter_grams"
+            android:inputType="number" />
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

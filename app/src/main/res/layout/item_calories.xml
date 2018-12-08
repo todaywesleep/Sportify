@@ -1,11 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/calories_item_root"
+    android:background="@drawable/item_calories"
+    android:layout_margin="@dimen/padding_small"
     android:padding="@dimen/padding_small">
 
     <TextView
         android:id="@+id/calories_item_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/calories_item_squirrels"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_nano"
+        android:text="@string/calories_squirrels"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/calories_item_fats"
+        app:layout_constraintHorizontal_bias="-1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calories_item_title" />
+
+    <TextView
+        android:id="@+id/calories_item_fats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_nano"
+        android:text="@string/calories_fats"
+        android:textAlignment="textEnd"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/calories_item_squirrels"
+        app:layout_constraintTop_toBottomOf="@id/calories_item_title" />
+
+    <TextView
+        android:id="@+id/calories_item_calories"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_nano"
+        android:layout_marginTop="@dimen/padding_small"
+        android:text="@string/calories_calories"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/calories_item_carbohydrates"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calories_item_squirrels" />
+
+    <TextView
+        android:id="@+id/calories_item_carbohydrates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_nano"
+        android:layout_marginTop="@dimen/padding_small"
+        android:text="@string/calories_carbohydrates"
+        android:textAlignment="textEnd"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/calories_item_squirrels"
+        app:layout_constraintTop_toBottomOf="@id/calories_item_fats" />
+</android.support.constraint.ConstraintLayout>

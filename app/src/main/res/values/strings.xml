@@ -65,4 +65,8 @@
     //CALORIES ACTIVITY
     <string name="calories_choose_product">Choose product from list</string>
     <string name="calories_enter_grams">Enter product weight</string>
+    <string name="calories_squirrels">Squirrels</string>
+    <string name="calories_fats">Fats</string>
+    <string name="calories_carbohydrates">Carbohydrates</string>
+    <string name="calories_calories">Calories</string>
 </resources>
