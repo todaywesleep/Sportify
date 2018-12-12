@@ -14,21 +14,101 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="2" />
 
-    <android.support.constraint.ConstraintLayout
+    <View
+        android:id="@+id/calories_divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@id/calories_measure" />
+
+    <ScrollView
         android:id="@+id/calories_measure"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="@dimen/padding_default"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calories_items"
         app:layout_constraintVertical_weight="1">
 
-        <EditText
-            android:id="@+id/calories_weight_input"
-            style="@style/BaseInput"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/calories_enter_grams"
-            android:inputType="number" />
-    </android.support.constraint.ConstraintLayout>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/calories_measure_prod_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/calories_weight_input"
+                style="@style/BaseInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:hint="@string/calories_enter_grams"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLines="1"
+                app:layout_constraintTop_toBottomOf="@id/calories_measure_prod_name" />
+
+            <TextView
+                android:id="@+id/calories_measure_item_squirrels"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padding_nano"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/calories_squirrels"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/calories_item_fats"
+                app:layout_constraintHorizontal_bias="-1"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calories_weight_input" />
+
+            <TextView
+                android:id="@+id/calories_measure_item_fats"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_nano"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/calories_fats"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/calories_item_squirrels"
+                app:layout_constraintTop_toBottomOf="@id/calories_weight_input" />
+
+            <TextView
+                android:id="@+id/calories_measure_item_calories"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padding_nano"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/calories_calories"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/calories_item_carbohydrates"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calories_measure_item_squirrels" />
+
+            <TextView
+                android:id="@+id/calories_measure_item_carbohydrates"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_nano"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/calories_carbohydrates"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/calories_item_squirrels"
+                app:layout_constraintTop_toBottomOf="@id/calories_measure_item_fats" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

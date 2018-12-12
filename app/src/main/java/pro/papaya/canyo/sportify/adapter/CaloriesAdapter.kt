@@ -23,13 +23,21 @@ class CaloriesAdapter(private val context: Context, private val data: ArrayList<
     var itemCarbohydrates: TextView = root.findViewById(R.id.calories_item_calories)
     var itemCalories: TextView = root.findViewById(R.id.calories_item_carbohydrates)
   }
+  interface Callback {
+    fun onItemPressed(product: Product)
+  }
+
+  private var mCallback: Callback? = null
   private var selectedItem: Int = -1
 
   private fun getItemOnClickListener(position: Int): View.OnClickListener {
     return View.OnClickListener {
-      if (position != selectedItem){
-        selectedItem = position
-        notifyDataSetChanged()
+      notifyItemChanged(selectedItem)
+      selectedItem = if (position != selectedItem){ position }else{ -1 }
+      notifyItemChanged(position)
+
+      if (mCallback != null){
+        mCallback!!.onItemPressed(data[position])
       }
     }
   }
@@ -52,6 +60,10 @@ class CaloriesAdapter(private val context: Context, private val data: ArrayList<
     } else {
       Html.fromHtml(html)
     }
+  }
+
+  fun setCallback(callback: Callback){
+    mCallback = callback
   }
 
   override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
