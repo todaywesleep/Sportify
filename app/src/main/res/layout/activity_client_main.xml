@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <!-- date toolbar -->
+    <RelativeLayout
+        android:id="@+id/main_date_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_default">
+
+        <!-- prev button -->
+        <ImageView
+            android:id="@+id/calendar_prev_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@color/colorBlack" />
+
+        <!-- date title -->
+        <TextView
+            android:id="@+id/calendar_date_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/calendar_prev_button"
+            android:layout_toStartOf="@+id/calendar_next_button"
+            android:gravity="center"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="#222222" />
+
+        <ImageView
+            android:id="@+id/calendar_next_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_next" />
+    </RelativeLayout>
+
+    <!-- days header -->
+    <LinearLayout
+        android:id="@+id/calendar_header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/main_date_toolbar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/calendar_monday"
+            android:textColor="#222222" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/calendar_tuesday"
+            android:textColor="#222222" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/calendar_wednesday"
+            android:textColor="#222222" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/calendar_thursday"
+            android:textColor="#222222" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/calendar_friday"
+            android:textColor="#222222" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/calendar_saturday"
+            android:textColor="#222222" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/calendar_sunday"
+            android:textColor="#222222" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/calendar_grid"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:layout_below="@id/calendar_header"
+        android:columnWidth="24dp"
+        android:numColumns="7"
+        android:verticalSpacing="@dimen/padding_small" />
+
+    <View
+        android:id="@+id/main_calendar_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/calendar_grid"
+        android:layout_marginTop="@dimen/padding_small"
+        android:background="@color/colorGray" />
+
+    <pro.papaya.canyo.sportify.fragment.DayInfoView
+        android:id="@+id/day_info"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/main_calendar_divider"
+        android:layout_marginTop="@dimen/padding_small"
+        android:padding="@dimen/padding_small" />
+</RelativeLayout>

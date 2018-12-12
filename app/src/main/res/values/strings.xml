@@ -1,4 +1,72 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Sportify</string>
     <string name="main_string">New Sample String</string>
+
+    //GLOBAL
+    <string name="gps_permissions_denied">Can\'t access to your current position. Are geolocation enabled?</string>
+    <string name="gps_access_permission">Please allow gps permission to get your position.</string>
+    <string name="toolbar_client">Client</string>
+    <string name="toolbar_trainer">Trainer</string>
+
+    //LOGIN
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">Login</string>
+    <string name="login_register">Register</string>
+    <string name="login_im_trainer">I\'m trainer</string>
+
+    //REGISTER
+    <string name="register_register">Register</string>
+
+    <string name="register_bio">Fill BIO information</string>
+    <string name="register_bio_first_name">First name</string>
+    <string name="register_bio_sec_name">Second name</string>
+    <string name="register_bio_birthday">Birthday</string>
+
+    <string name="register_place">Fill place information</string>
+    <string name="register_place_get_location">Get my location</string>
+    <string name="register_place_country">Country</string>
+    <string name="register_place_city">City</string>
+    <string name="register_place_street">Street</string>
+    <string name="register_place_house">House</string>
+    <string name="register_place_additional_info">Additional info</string>
+
+    <string name="register_credentials">Fill credentials information</string>
+    <string name="register_credentials_login">Login</string>
+    <string name="register_credentials_password">Password</string>
+    <string name="register_credentials_repeat_password">Repeat password</string>
+
+    <string name="register_next_step">Next step</string>
+    <string name="register_finish">Finish registration</string>
+
+    //CALENDAR
+    <string name="calendar_monday">Mon</string>
+    <string name="calendar_tuesday">Tue</string>
+    <string name="calendar_wednesday">Wed</string>
+    <string name="calendar_thursday">Thu</string>
+    <string name="calendar_friday">Fri</string>
+    <string name="calendar_saturday">Sat</string>
+    <string name="calendar_sunday">Sun</string>
+    <string name="calendar_day_more_information">More information</string>
+    <string name="calendar_select_day">Select day on calendar view to get information</string>
+
+    //DRAWER
+    <string name="drawer_edit_profile">Edit profile</string>
+    <string name="drawer_logout">Logout</string>
+    <string name="drawer_profile">Profile</string>
+    <string name="drawer_calories">Calories</string>
+    <string name="drawer_trainer_chat">Trainer chat</string>
+    <string name="drawer_client_chat">Client chat</string>
+    <string name="drawer_clients_info">Clients info</string>
+
+    //MAIN TRAINER ACTIVITY
+    <string name="main_trainer_activity_subheader">Upcoming Events</string>
+
+    //CALORIES ACTIVITY
+    <string name="calories_choose_product">Choose product from list</string>
+    <string name="calories_enter_grams">Enter product weight</string>
+    <string name="calories_squirrels">Squirrels</string>
+    <string name="calories_fats">Fats</string>
+    <string name="calories_carbohydrates">Carbohydrates</string>
+    <string name="calories_calories">Calories</string>
 </resources>

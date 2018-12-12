@@ -1,12 +1,13 @@
-package pro.papaya.canyo.myapplication.network
+package pro.papaya.canyo.sportify.network
 
-import android.content.Context
-import android.widget.Toast
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import pro.papaya.canyo.myapplication.model.Joke
+import pro.papaya.canyo.sportify.model.BaseResponse
+import pro.papaya.canyo.sportify.model.Joke
+import pro.papaya.canyo.sportify.model.RegisterBody
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient {
     companion object {
@@ -22,7 +23,7 @@ class ApiClient {
                     .build()
 
             val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.chucknorris.io/")
+                    .baseUrl("http://18.220.223.146:5555/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()
@@ -30,18 +31,12 @@ class ApiClient {
             api = retrofit!!.create<Api>(Api::class.java) //Создаем объект, при помощи которого будем выполнять запросы
         }
 
-        fun getJoke(context: Context){
-            val messages = api!!.getJoke()
+        fun getJoke(): Call<Joke> {
+            return api!!.getJoke()
+        }
 
-            messages.enqueue(object : Callback<Joke> {
-                override fun onFailure(call: Call<Joke>?, t: Throwable?) {
-                    Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onResponse(call: Call<Joke>?, response: Response<Joke>?) {
-                    Toast.makeText(context, response?.body()?.value, Toast.LENGTH_SHORT).show()
-                }
-            })
+        fun register(body: RegisterBody): Call<BaseResponse> {
+            return api!!.register(body)
         }
     }
 }

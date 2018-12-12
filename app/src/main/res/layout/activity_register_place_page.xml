@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/register_place_bio"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/register_place"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_above="@id/register_next_step"
+            android:layout_below="@id/register_place_bio"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_default">
+
+            <EditText
+                android:id="@+id/register_country"
+                style="@style/BaseInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/register_place_country"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|text"
+                android:nextFocusForward="@id/register_city"
+                android:padding="@dimen/padding_small" />
+
+            <EditText
+                android:id="@+id/register_city"
+                style="@style/BaseInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:hint="@string/register_place_city"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
+                android:padding="@dimen/padding_small" />
+
+            <EditText
+                android:id="@+id/register_street"
+                style="@style/BaseInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:hint="@string/register_place_street"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
+                android:padding="@dimen/padding_small" />
+
+            <EditText
+                android:id="@+id/register_house"
+                style="@style/BaseInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:hint="@string/register_place_house"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
+                android:padding="@dimen/padding_small" />
+
+            <EditText
+                android:id="@+id/register_additional_info"
+                style="@style/BaseInput"
+                android:maxLines="5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
+                android:hint="@string/register_place_additional_info"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|text"
+                android:padding="@dimen/padding_small" />
+
+            <Button
+                android:id="@+id/register_place_get_location"
+                style="@style/BaseButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_base"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="@string/register_place_get_location" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/register_next_step"
+            style="@style/BaseButton"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/padding_default"
+            android:layout_marginEnd="@dimen/padding_default"
+            android:layout_marginStart="@dimen/padding_default"
+            android:background="@drawable/button_inactive"
+            android:text="@string/register_next_step" />
+    </RelativeLayout>
+</ScrollView>
